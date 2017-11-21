@@ -25,6 +25,12 @@ class Bone:
 
         return self.parent.transform_matrix() * mat
 
+    def rotation_totale(self):
+        if self.parent is None:
+            return self.rotation
+
+        return self.parent.rotation + self.rotation
+
     def add_child(self, c):
         c.parent = self
         self.children.append(c)
@@ -48,11 +54,11 @@ class Bone:
 
     def position_start(self):
         p = self.start()
-        return (p[0], p[1])
+        return (p[0, 0], p[1, 0])
 
     def position_end(self):
         p = self.end()
-        return (p[0], p[1])
+        return (p[0, 0], p[1, 0])
 
     def rotate(self, angles):
         """
